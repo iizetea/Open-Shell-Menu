@@ -1,5 +1,4 @@
-// Classic Shell (c) 2009-2017, Ivo Beltchev
-// Open-Shell (c) 2017-2018, The Open-Shell Team
+// Classic Shell (c) 2009-2016, Ivo Beltchev
 // Confidential information of Ivo Beltchev. Not for disclosure or distribution without prior written consent from the author
 
 #pragma once
@@ -192,7 +191,7 @@ class CUserWindow: public CWindowImpl<CUserWindow>
 {
 public:
 	CUserWindow( void ) { m_pOwner=NULL; m_Bits=NULL; m_bDefaultImage=true; m_Bitmap=m_UserBitmap=m_TimerBitmap=NULL; m_Timer=0; m_Size.cx=m_Size.cy=0; }
-	DECLARE_WND_CLASS_EX(L"OpenShell.CUserWindow",0,COLOR_MENU)
+	DECLARE_WND_CLASS_EX(L"ClassicShell.CUserWindow",0,COLOR_MENU)
 
 	// message handlers
 	BEGIN_MSG_MAP( CUserWindow )
@@ -256,7 +255,7 @@ public:
 	{
 		static ATL::CWndClassInfo wc =
 		{
-			{sizeof(WNDCLASSEX),CS_DROPSHADOW|CS_DBLCLKS,StartWindowProc,0,0,NULL,NULL,NULL,(HBRUSH)(COLOR_MENU+1),NULL,L"OpenShell.CMenuContainer",NULL},
+			{sizeof(WNDCLASSEX),CS_DROPSHADOW|CS_DBLCLKS,StartWindowProc,0,0,NULL,NULL,NULL,(HBRUSH)(COLOR_MENU+1),NULL,L"ClassicShell.CMenuContainer",NULL},
 			NULL,NULL,IDC_ARROW,TRUE,0,_T("")
 		};
 		return wc;
@@ -957,6 +956,7 @@ private:
 	friend LRESULT CALLBACK SubclassTopMenuProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData );
 	friend HRESULT CreatePinLink( PCIDLIST_ABSOLUTE sourcePidl, const wchar_t *name, const wchar_t *iconPath, int iconIndex );
 
+	static void HideTemp( bool bHide );
 	static void AddMRUShortcut( const wchar_t *path );
 	static void AddMRUAppId( const wchar_t *appid );
 	static void DeleteMRUShortcut( const wchar_t *path );
@@ -992,7 +992,7 @@ private:
 	static HRESULT __stdcall CreateAccessible( ComCallData *pData );
 	static HRESULT __stdcall ReleaseAccessible( ComCallData *pData );
 
-	// To control the placement of the start menu, send OpenShellMenu.StartMenuMsg message right after the start menu is created but before it is displayed
+	// To control the placement of the start menu, send ClassicStartMenu.StartMenuMsg message right after the start menu is created but before it is displayed
 	// The lParam must point to StartMenuParams
 	// monitorRect - the entire area available to the start menu (sub-menus will use it). It is usually the monitor area but can be less if the Desktop app is docked in Win8
 	// uEdge - the location of the taskbar - ABE_BOTTOM, ABE_LEFT, etc
@@ -1087,7 +1087,7 @@ public:
 	{
 		static ATL::CWndClassInfo wc =
 		{
-			{sizeof(WNDCLASSEX),CS_DROPSHADOW|CS_DBLCLKS,StartWindowProc,0,0,NULL,NULL,NULL,(HBRUSH)(COLOR_MENU+1),NULL,L"OpenShell.CMenuContainer",NULL},
+			{sizeof(WNDCLASSEX),CS_DROPSHADOW|CS_DBLCLKS,StartWindowProc,0,0,NULL,NULL,NULL,(HBRUSH)(COLOR_MENU+1),NULL,L"ClassicShell.CMenuContainer",NULL},
 			NULL,NULL,IDC_ARROW,TRUE,0,_T("")
 		};
 		return wc;
@@ -1103,7 +1103,7 @@ class CMenuFader: public CWindowImpl<CMenuFader>
 public:
 	CMenuFader( HBITMAP bmp, HRGN region, int duration, RECT &rect );
 	~CMenuFader( void );
-	DECLARE_WND_CLASS_EX(L"OpenShell.CMenuFader",0,COLOR_MENU)
+	DECLARE_WND_CLASS_EX(L"ClassicShell.CMenuFader",0,COLOR_MENU)
 
 	// message handlers
 	BEGIN_MSG_MAP( CMenuFader )
